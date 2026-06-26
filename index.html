@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nguyen Minh Hoang Duong — Senior Flutter Developer</title>
+<meta name="description" content="Portfolio of Nguyen Minh Hoang Duong, Senior Flutter Developer. 5+ years shipping cross-platform iOS &amp; Android apps across healthcare, edtech, e-commerce and entertainment, including Singpass digital identity integration.">
+<meta property="og:title" content="Nguyen Minh Hoang Duong — Senior Flutter Developer">
+<meta property="og:description" content="5+ years building production Flutter apps. Clean Architecture, Singpass integration, CI/CD.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hoangduongit1997.github.io/portfolio/">
+<meta property="og:image" content="https://hoangduongit1997.github.io/portfolio/og.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nguyen Minh Hoang Duong — Senior Flutter Developer">
+<meta name="twitter:description" content="5+ years building production Flutter apps. Clean Architecture, Singpass integration, CI/CD.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23161a25'/%3E%3Ctext x='32' y='40' font-family='monospace' font-size='22' font-weight='700' fill='%236fb7f0' text-anchor='middle'%3E%3C/%3E%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #11141b;
+    --bg-panel: #181c27;
+    --bg-panel-2: #1f2532;
+    --line: #2a3142;
+    --ink: #e7eaf2;
+    --ink-dim: #8a93ab;
+    --ink-faint: #5d6680;
+    --blue: #6fb7f0;
+    --blue-soft: rgba(111,183,240,.13);
+    --amber: #e8a857;
+    --amber-soft: rgba(232,168,87,.14);
+    --teal: #57d6b8;
+    --teal-soft: rgba(87,214,184,.14);
+    --radius: 12px;
+    --maxw: 1080px;
+    --font-display: 'Sora', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      radial-gradient(circle at 18% 8%, rgba(111,183,240,.07), transparent 38%),
+      radial-gradient(circle at 85% 0%, rgba(87,214,184,.05), transparent 35%);
+    pointer-events:none;
+    z-index:0;
+  }
+
+  a{color:var(--blue); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+
+  :focus-visible{
+    outline:2px solid var(--blue);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px; position:relative; z-index:1;}
+
+  .eyebrow{
+    font-family:var(--font-body);
+    font-size:12px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0 0 14px;
+  }
+
+  h2.section-title{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:clamp(22px, 3vw, 30px);
+    margin:0 0 28px;
+    letter-spacing:-.01em;
+  }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(17,20,27,.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav__inner{
+    max-width:var(--maxw); margin:0 auto; padding:0 24px;
+    display:flex; align-items:center; justify-content:space-between;
+    height:60px;
+  }
+  .nav__logo{
+    font-family:var(--font-mono); font-weight:600; font-size:15px;
+    color:var(--ink); white-space:nowrap;
+  }
+  .nav__logo .br{color:var(--ink-faint);}
+  .nav__logo .nm{color:var(--blue);}
+  .nav__links{
+    display:flex; align-items:center; gap:22px;
+    overflow-x:auto;
+    scrollbar-width:none;
+    font-size:13.5px;
+  }
+  .nav__links::-webkit-scrollbar{display:none;}
+  .nav__links a{
+    color:var(--ink-dim); white-space:nowrap; padding:4px 0;
+    border-bottom:2px solid transparent;
+    transition:color .15s, border-color .15s;
+  }
+  .nav__links a:hover{color:var(--ink); text-decoration:none;}
+  .nav__links a.active{color:var(--blue); border-color:var(--blue);}
+  .nav__gh{
+    flex:none; display:flex; align-items:center; gap:6px;
+    color:var(--ink); border:1px solid var(--line); border-radius:8px;
+    padding:6px 12px; margin-left:14px; font-size:13px;
+    font-family:var(--font-mono);
+    transition:border-color .15s, background .15s;
+  }
+  .nav__gh:hover{border-color:var(--blue); background:var(--blue-soft); text-decoration:none;}
+  .nav__gh svg{width:15px; height:15px; flex:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:56px 0 64px;}
+  .hero-card{
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:var(--bg-panel);
+    overflow:hidden;
+    display:flex;
+    align-items:stretch;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,.6);
+  }
+  .hero-photo{
+    flex:none; width:240px;
+    object-fit:cover; object-position:top center;
+    display:block;
+    border-right:1px solid var(--line);
+  }
+  .hero-info{
+    padding:34px 28px;
+    flex:1;
+    display:flex; flex-direction:column; justify-content:center;
+    background:radial-gradient(circle at 100% 0%, rgba(111,183,240,.06), transparent 45%);
+  }
+  @media (max-width:780px){
+    .hero-card{flex-direction:column;}
+    .hero-photo{width:100%; max-height:320px; border-right:none; border-bottom:1px solid var(--line);}
+  }
+
+  .preview-name{
+    font-family:var(--font-display); font-weight:700;
+    font-size:clamp(26px, 3.4vw, 34px); line-height:1.15; margin:0 0 6px;
+    letter-spacing:-.01em;
+  }
+  .preview-role{
+    font-family:var(--font-mono); color:var(--amber); font-size:15px; margin:0 0 16px;
+  }
+  .preview-meta{
+    display:flex; flex-wrap:wrap; gap:14px; font-size:13.5px; color:var(--ink-dim);
+    margin-bottom:18px;
+  }
+  .preview-meta span{display:flex; align-items:center; gap:6px;}
+  .preview-meta svg{width:14px; height:14px; flex:none; color:var(--ink-faint);}
+
+  .preview-tagline{font-size:14.5px; color:var(--ink-dim); margin:0 0 22px; max-width:480px;}
+
+  .stat-row{display:flex; gap:22px; margin-bottom:24px; flex-wrap:wrap;}
+  .stat b{font-family:var(--font-display); font-size:20px; color:var(--ink); display:block;}
+  .stat span{font-family:var(--font-mono); font-size:11.5px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.03em;}
+
+  .cta-row{display:flex; gap:10px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--font-mono); font-size:13.5px; font-weight:500;
+    padding:10px 16px; border-radius:8px; display:inline-flex; align-items:center; gap:8px;
+    transition:transform .15s, border-color .15s, background .15s;
+  }
+  .btn svg{width:14px; height:14px;}
+  .btn--primary{background:var(--blue); color:#0b1118;}
+  .btn--primary:hover{transform:translateY(-1px); text-decoration:none;}
+  .btn--ghost{border:1px solid var(--line); color:var(--ink);}
+  .btn--ghost:hover{border-color:var(--blue); color:var(--blue); text-decoration:none;}
+  .btn--copy{border:1px solid var(--line); color:var(--ink-dim); cursor:pointer; background:none; font-family:var(--font-mono);}
+  .btn--copy:hover{border-color:var(--teal); color:var(--teal);}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:64px 0;}
+  section + section{border-top:1px solid var(--line);}
+
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity .55s ease, transform .55s ease;}
+  .reveal.in{opacity:1; transform:none;}
+
+  /* ---------- SUMMARY ---------- */
+  .summary-grid{display:grid; grid-template-columns:1.3fr .9fr; gap:40px; align-items:start;}
+  @media (max-width:780px){ .summary-grid{grid-template-columns:1fr;} }
+  .summary-text p{color:var(--ink-dim); font-size:16px; margin:0 0 16px;}
+  .summary-text strong{color:var(--ink); font-weight:600;}
+  .focus-card{
+    border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-panel);
+    padding:20px;
+  }
+  .focus-card h3{
+    font-family:var(--font-body); font-size:12px; color:var(--ink-faint);
+    text-transform:uppercase; letter-spacing:.05em; margin:0 0 14px; font-weight:600;
+  }
+  .focus-card ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:11px;}
+  .focus-card li{display:flex; gap:10px; font-size:14px; color:var(--ink-dim);}
+  .focus-card li svg{width:15px; height:15px; flex:none; margin-top:2px; color:var(--teal);}
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  @media (max-width:780px){.skills-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:480px){.skills-grid{grid-template-columns:1fr;}}
+  .skill-cat{
+    border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-panel);
+    padding:16px 16px 18px;
+  }
+  .skill-cat-title{
+    font-family:var(--font-body); font-weight:600; font-size:12px; color:var(--ink-faint);
+    text-transform:uppercase; letter-spacing:.05em; margin:0 0 12px;
+  }
+
+  /* ---------- EXPERIENCE (git-log timeline) ---------- */
+  .timeline{position:relative; padding-left:26px;}
+  .timeline::before{
+    content:""; position:absolute; left:5px; top:6px; bottom:6px; width:1px;
+    background:linear-gradient(to bottom, var(--line), var(--line) 92%, transparent);
+  }
+  .commit{position:relative; margin-bottom:18px;}
+  .commit::before{
+    content:""; position:absolute; left:-26px; top:18px; width:11px; height:11px;
+    border-radius:50%; background:var(--bg); border:2px solid var(--blue);
+  }
+  .commit[open]::before{background:var(--blue);}
+  .commit summary{
+    list-style:none; cursor:pointer; user-select:none;
+    border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-panel);
+    padding:16px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    transition:border-color .15s;
+  }
+  .commit summary::-webkit-details-marker{display:none;}
+  .commit summary:hover{border-color:var(--blue);}
+  .commit[open] summary{border-bottom-left-radius:0; border-bottom-right-radius:0;}
+  .commit-chevron{
+    margin-left:auto; width:16px; height:16px; flex:none; color:var(--ink-faint);
+    transition:transform .2s;
+  }
+  .commit[open] .commit-chevron{transform:rotate(90deg);}
+  .commit-role{font-family:var(--font-display); font-weight:600; font-size:15.5px; color:var(--ink);}
+  .commit-meta{display:flex; flex-wrap:wrap; gap:10px; align-items:center; font-family:var(--font-mono); font-size:12px; color:var(--ink-dim);}
+  .pill{
+    font-family:var(--font-mono); font-size:11.5px; padding:3px 9px; border-radius:99px;
+    border:1px solid var(--line); color:var(--ink-dim); white-space:nowrap;
+  }
+  .pill--now{border-color:var(--teal); color:var(--teal); background:var(--teal-soft);}
+  .commit-body{
+    border:1px solid var(--line); border-top:none; border-radius:0 0 var(--radius) var(--radius);
+    background:var(--bg-panel); padding:20px 18px 22px;
+  }
+  .commit-org{font-size:13.5px; color:var(--ink-dim); margin:0 0 14px;}
+  .commit-org b{color:var(--ink); font-weight:600;}
+  .commit-bullets{margin:0 0 16px; padding-left:18px; color:var(--ink-dim); font-size:14.5px;}
+  .commit-bullets li{margin-bottom:7px;}
+  .commit-bullets li::marker{color:var(--blue);}
+  .tagrow{display:flex; flex-wrap:wrap; gap:6px;}
+  .tag{
+    font-family:var(--font-mono); font-size:11px; padding:3px 8px; border-radius:6px;
+    background:var(--blue-soft); color:var(--blue);
+  }
+
+  .subproj{
+    border-left:2px solid var(--line); margin-top:18px; padding-left:18px;
+    display:flex; flex-direction:column; gap:18px;
+  }
+  .subproj-item h4{
+    margin:0 0 4px; font-family:var(--font-display); font-size:14.5px; font-weight:600; color:var(--ink);
+  }
+  .subproj-item .subproj-domain{
+    font-family:var(--font-mono); font-size:11.5px; color:var(--amber); margin-bottom:8px; display:block;
+  }
+  .subproj-item p{margin:0 0 8px; font-size:13.8px; color:var(--ink-dim);}
+
+  /* ---------- EDUCATION ---------- */
+  .edu-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:16px;}
+  @media (max-width:780px){.edu-grid{grid-template-columns:1fr;}}
+  .edu-card{
+    border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-panel);
+    padding:20px;
+  }
+  .edu-card h3{font-family:var(--font-body); font-weight:600; font-size:15px; color:var(--ink); margin:0 0 8px;}
+  .edu-degree{font-size:14px; color:var(--ink-dim); margin:0 0 6px;}
+  .edu-years{font-size:13px; color:var(--ink-faint); margin:0; font-family:var(--font-mono);}
+  .edu-card ul{margin:0; padding-left:16px; color:var(--ink-dim); font-size:14px;}
+  .edu-card li{margin-bottom:6px;}
+  .edu-card p{margin:0 0 6px; font-size:14px; color:var(--ink-dim);}
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  .contact-panel{
+    border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-panel);
+    padding:30px 26px;
+  }
+  .contact-grid{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:4px;}
+
+  footer{padding:30px 0 50px; text-align:center;}
+  footer p{font-family:var(--font-mono); font-size:12.5px; color:var(--ink-faint); margin:0;}
+  footer a{color:var(--ink-dim);}
+
+  /* ---------- STORE BADGES ---------- */
+  .store-row{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;}
+  .store-badge{
+    font-family:var(--font-mono); font-size:11.5px; padding:4px 10px; border-radius:99px;
+    border:1px solid var(--line); color:var(--ink-dim); white-space:nowrap;
+    display:inline-flex; align-items:center; gap:5px;
+    transition:border-color .15s, color .15s;
+  }
+  .store-badge:hover{border-color:var(--teal); color:var(--teal); text-decoration:none;}
+  .store-badge svg{width:10px; height:10px; flex:none;}
+
+  /* ---------- FOOTER LINKS ---------- */
+  .footer-links{display:flex; justify-content:center; gap:16px; margin-bottom:12px;}
+  .footer-link{
+    display:flex; align-items:center; justify-content:center;
+    width:36px; height:36px; border-radius:50%;
+    border:1px solid var(--line); color:var(--ink-faint);
+    transition:border-color .15s, color .15s;
+  }
+  .footer-link:hover{border-color:var(--blue); color:var(--blue); text-decoration:none;}
+  .footer-link svg{width:16px; height:16px;}
+
+  ::selection{background:var(--blue-soft); color:var(--ink);}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav__inner">
+    <div class="nav__logo"><span class="br">&lt;</span><span class="nm">ND</span><span class="br">/&gt;</span></div>
+    <div class="nav__links" id="navLinks">
+      <a href="#summary">Summary</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav__gh" href="https://github.com/hoangduongit1997" target="_blank" rel="noopener">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+      github
+    </a>
+    <a class="nav__gh" href="https://www.linkedin.com/in/hoangduongit1997" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      linkedin
+    </a>
+  </div>
+</nav>
+
+<!-- hero -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-card reveal in">
+      <img src="avatar.jpg" class="hero-photo" alt="Nguyen Minh Hoang Duong">
+      <div class="hero-info">
+        <h1 class="preview-name">Nguyen Minh Hoang Duong</h1>
+        <p class="preview-role">Senior Flutter Developer</p>
+        <div class="preview-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>Tan Phu, Ho Chi Minh City, VN</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>0948 907 687</span>
+          <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>linkedin.com/in/hoangduongit1997</span>
+        </div>
+        <p class="preview-tagline">Cross-platform mobile engineer shipping production Flutter apps across healthcare, edtech, e-commerce and entertainment — from Singpass digital identity to CI/CD pipelines.</p>
+        <div class="stat-row">
+          <div class="stat"><b>5+</b><span>years exp.</span></div>
+          <div class="stat"><b>14+</b><span>apps shipped</span></div>
+          <div class="stat"><b>4</b><span>industries</span></div>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn--primary" href="mailto:hoangduongit1997@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4V4Z"/><path d="m22 6-10 7L2 6"/></svg>Email me
+          </a>
+          <a class="btn btn--ghost" href="https://github.com/hoangduongit1997" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>View GitHub
+          </a>
+          <button class="btn btn--copy" id="copyEmailBtn" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span id="copyEmailLabel">copy email</span>
+          </button>
+          <a class="btn btn--ghost" href="https://www.linkedin.com/in/hoangduongit1997" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn
+          </a>
+          <a class="btn btn--ghost" href="CV_Nguyen_Minh_Hoang_Duong.pdf" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download CV
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="summary">
+  <div class="wrap reveal">
+    <p class="eyebrow">About</p>
+    <h2 class="section-title">What I do</h2>
+    <div class="summary-grid">
+      <div class="summary-text">
+        <p><strong>5+ years</strong> building, shipping and maintaining cross-platform mobile apps on iOS &amp; Android, across <strong>healthcare, edtech, e-commerce and entertainment</strong>.</p>
+        <p>I lead app architecture with <strong>Clean Architecture, MVVM, OOP and Domain-Driven Design</strong>, and have delivered complex integrations including <strong>Singpass</strong> national digital identity, native bridging (Java/Swift), and full CI/CD pipelines with Codemagic.</p>
+        <p>Strong track record of improving app performance, stability and release velocity while keeping codebases scalable and maintainable. Comfortable owning features end-to-end — from requirement analysis with clients to code review and mentoring teammates.</p>
+      </div>
+      <div class="focus-card">
+        <h3>Currently focused on</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7"/></svg>Identity &amp; auth flows — Singpass-grade verification</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7"/></svg>Architecting Flutter apps that scale across teams of 20+</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7"/></svg>Crash-rate &amp; performance reduction (−30% error rate @ Care Health)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7"/></svg>Mentoring &amp; code review across native + Flutter layers</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap reveal">
+    <p class="eyebrow">Skills</p>
+    <h2 class="section-title">Toolbox</h2>
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <h3 class="skill-cat-title">Mobile (Core)</h3>
+        <div class="tagrow">
+          <span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">iOS &amp; Android</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3 class="skill-cat-title">State Management</h3>
+        <div class="tagrow">
+          <span class="tag">Bloc</span><span class="tag">Cubit</span><span class="tag">GetX</span><span class="tag">RxDart</span><span class="tag">Provider</span><span class="tag">Riverpod</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3 class="skill-cat-title">Architecture</h3>
+        <div class="tagrow">
+          <span class="tag">Clean Architecture</span><span class="tag">MVVM</span><span class="tag">OOP</span><span class="tag">Domain-Driven Design</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3 class="skill-cat-title">Backend &amp; Cloud</h3>
+        <div class="tagrow">
+          <span class="tag">Firebase Auth</span><span class="tag">Firestore</span><span class="tag">Crashlytics</span><span class="tag">Analytics</span><span class="tag">Messaging</span><span class="tag">Remote Config</span><span class="tag">Google Cloud APIs</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3 class="skill-cat-title">Maps &amp; Location</h3>
+        <div class="tagrow">
+          <span class="tag">Google Maps</span><span class="tag">Mapbox</span><span class="tag">Geolocation</span><span class="tag">Location Tracking</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3 class="skill-cat-title">CI/CD &amp; DevOps</h3>
+        <div class="tagrow">
+          <span class="tag">Codemagic</span><span class="tag">Automated Build &amp; Deploy</span><span class="tag">Deeplink</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3 class="skill-cat-title">Native &amp; Integrations</h3>
+        <div class="tagrow">
+          <span class="tag">Java/Kotlin</span><span class="tag">Swift</span><span class="tag">Platform Channels</span><span class="tag">InAppWebView</span><span class="tag">Singpass</span><span class="tag">Stringee SDK</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3 class="skill-cat-title">Web (Familiar)</h3>
+        <div class="tagrow">
+          <span class="tag">Vue.js</span><span class="tag">React.js</span><span class="tag">React Native</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3 class="skill-cat-title">Misc</h3>
+        <div class="tagrow">
+          <span class="tag">Hive</span><span class="tag">Push Notifications</span><span class="tag">QR Code</span><span class="tag">Picture-in-Picture</span><span class="tag">Video Caching</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap reveal">
+    <p class="eyebrow">Work Experience</p>
+    <h2 class="section-title">Where I've shipped</h2>
+
+    <div class="timeline">
+
+      <details class="commit" open>
+        <summary>
+          <span class="commit-role">Senior Flutter Developer</span>
+          <span class="commit-meta"><span class="pill pill--now">current</span><span>Oct 2023 – Present</span><span>· team of 20</span></span>
+          <svg class="commit-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </summary>
+        <div class="commit-body">
+          <p class="commit-org"><b>Care Health — Doctor World Pte Ltd</b> · Raffles Connect · Healthcare · Singapore · Android &amp; iOS</p>
+          <ul class="commit-bullets">
+            <li>Owned feature development, code review and performance optimization within a 20-person team on a healthcare platform delivering medical services on mobile.</li>
+            <li>Integrated <strong style="color:var(--ink)">Singpass</strong> (Singapore national digital identity) for secure authentication and identity verification.</li>
+            <li>Built complex flows using deeplink, InAppWebView and background processing; integrated Google Maps for clinic/location features.</li>
+            <li>Reduced app error rate by <strong style="color:var(--teal)">30%</strong> and improved performance by <strong style="color:var(--teal)">10%</strong>, monitored via Firebase Crashlytics &amp; Analytics.</li>
+          </ul>
+          <div class="store-row">
+            <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.rcPatient" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7z"/></svg>Google Play
+            </a>
+            <a class="store-badge" href="https://apps.apple.com/vn/app/raffles-connect/id1444394990" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v10M8 9l4 4 4-4"/><path d="M20 16v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2"/></svg>App Store
+            </a>
+          </div>
+          <div class="tagrow">
+            <span class="tag">Flutter</span><span class="tag">GetX</span><span class="tag">RxDart</span><span class="tag">Firebase</span><span class="tag">Google Maps</span><span class="tag">Codemagic</span><span class="tag">Deeplink</span><span class="tag">InAppWebView</span><span class="tag">Singpass</span>
+          </div>
+        </div>
+      </details>
+
+      <details class="commit">
+        <summary>
+          <span class="commit-role">Freelance Flutter Developer</span>
+          <span class="commit-meta"><span>May 2024 – Aug 2024</span><span>· team of 5</span></span>
+          <svg class="commit-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </summary>
+        <div class="commit-body">
+          <p class="commit-org"><b>Clevermann Educational Consulting Co., Ltd</b> · iDeutsch · EdTech · German language learning</p>
+          <ul class="commit-bullets">
+            <li>Delivered 3 interactive learning modules end-to-end — Grammar (dictation), Vocabulary (multiple-choice) and Dialogue (conversation practice).</li>
+            <li>Optimized app performance and published to both Google Play and the App Store.</li>
+            <li>Automated build &amp; deployment with Codemagic, shortening the release cycle significantly.</li>
+          </ul>
+          <div class="tagrow">
+            <span class="tag">Flutter</span><span class="tag">GetX</span><span class="tag">RxDart</span><span class="tag">Firebase</span><span class="tag">Codemagic</span>
+          </div>
+        </div>
+      </details>
+
+      <details class="commit">
+        <summary>
+          <span class="commit-role">Mid-level Flutter Developer</span>
+          <span class="commit-meta"><span>Jul 2021 – Sep 2023</span><span>· 5 projects</span></span>
+          <svg class="commit-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </summary>
+        <div class="commit-body">
+          <p class="commit-org"><b>Splus — Software Joint Stock Company</b></p>
+          <div class="subproj">
+            <div class="subproj-item">
+              <h4>Ibecomi</h4>
+              <span class="subproj-domain">Sport · Motorcyclist &amp; racing management · Android</span>
+              <p>Designed the project architecture and worked directly with clients to analyze requirements; led feature development, code review and third-party integrations. Optimized performance for smoother UX and lower crash rates; published to both stores.</p>
+              <div class="store-row">
+                <a class="store-badge" href="https://play.google.com/store/apps/details?id=jp.u1gp.u1gp" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7z"/></svg>Google Play
+                </a>
+              </div>
+              <div class="tagrow"><span class="tag">Flutter</span><span class="tag">GetX</span><span class="tag">RxDart</span><span class="tag">Firebase</span><span class="tag">Google Maps</span><span class="tag">Local Notification</span></div>
+            </div>
+            <div class="subproj-item">
+              <h4>dTV</h4>
+              <span class="subproj-domain">Entertainment · Docomo (Japan) video streaming</span>
+              <p>Investigated and fixed cross-layer bugs spanning the Flutter codebase and native modules (Java for Android, Swift for iOS). Worked on video playback, Picture-in-Picture, caching, downloads and Remote Config; reduced crash rates and improved performance.</p>
+              <div class="tagrow"><span class="tag">Flutter</span><span class="tag">Java</span><span class="tag">Swift</span><span class="tag">Firebase</span><span class="tag">InAppWebView</span><span class="tag">PiP</span><span class="tag">Video Caching</span></div>
+            </div>
+            <div class="subproj-item">
+              <h4>Walkin</h4>
+              <span class="subproj-domain">Business · Door-to-door service booking · Android &amp; iOS</span>
+              <p>Developed features and optimized performance for a multi-service booking app with real-time location tracking.</p>
+              <div class="store-row">
+                <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.achilleusconsulting.walkin" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7z"/></svg>Google Play
+                </a>
+                <a class="store-badge" href="https://apps.apple.com/vn/app/walkin-services-to-your-door/id1628527966" target="_blank" rel="noopener">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v10M8 9l4 4 4-4"/><path d="M20 16v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2"/></svg>App Store
+                </a>
+              </div>
+              <div class="tagrow"><span class="tag">Flutter</span><span class="tag">Cloud Firestore</span><span class="tag">Firebase Auth</span><span class="tag">Google Maps</span><span class="tag">Cubit/Bloc</span><span class="tag">Hive</span></div>
+            </div>
+            <div class="subproj-item">
+              <h4>GolfApp</h4>
+              <span class="subproj-domain">Sport</span>
+              <p>Web-view/app communication without API, screen navigation bridging, canvas-over-video; published to both stores.</p>
+              <div class="tagrow"><span class="tag">Flutter</span><span class="tag">InAppWebView</span><span class="tag">Canvas</span></div>
+            </div>
+            <div class="subproj-item">
+              <h4>Beewaving</h4>
+              <span class="subproj-domain">Business · Customer management for nail salons in Germany</span>
+              <p>Requirement analysis, feature development and store release.</p>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="commit">
+        <summary>
+          <span class="commit-role">Junior Flutter Developer</span>
+          <span class="commit-meta"><span>May 2020 – Jun 2021</span><span>· 5 projects</span></span>
+          <svg class="commit-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </summary>
+        <div class="commit-body">
+          <p class="commit-org"><b>Sentora Vietnam Joint Stock Company</b></p>
+          <div class="subproj">
+            <div class="subproj-item">
+              <h4>AQBooking</h4>
+              <span class="subproj-domain">Tourism · Hotel &amp; flight booking</span>
+              <p>Built the hotel-booking module within a 10-person team using a Domain-Driven Design approach.</p>
+              <div class="tagrow"><span class="tag">Flutter</span><span class="tag">Firebase Messaging</span><span class="tag">Google Maps</span><span class="tag">Cubit/Bloc</span><span class="tag">DDD</span></div>
+            </div>
+            <div class="subproj-item">
+              <h4>CChat</h4>
+              <span class="subproj-domain">E-commerce · Fashion shopping</span>
+              <p>Integrated FCM push notifications and researched in-app video calling with the Stringee SDK.</p>
+              <div class="tagrow"><span class="tag">Flutter</span><span class="tag">Firebase Auth</span><span class="tag">Bloc</span><span class="tag">Stringee SDK</span></div>
+            </div>
+            <div class="subproj-item">
+              <h4>Babyfood · Isamdo Kids · Agrich</h4>
+              <span class="subproj-domain">E-commerce</span>
+              <p>Set up project structures, analyzed client requirements, integrated libraries, reviewed code, mentored teammates and published apps to both stores.</p>
+              <div class="tagrow"><span class="tag">Flutter</span><span class="tag">Firebase</span><span class="tag">Bloc/Cubit</span></div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="commit">
+        <summary>
+          <span class="commit-role">Junior Flutter Developer</span>
+          <span class="commit-meta"><span>Jul 2019 – Apr 2020</span><span>· 2 projects</span></span>
+          <svg class="commit-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </summary>
+        <div class="commit-body">
+          <p class="commit-org"><b>Pika Tech and Analytics Joint Stock Company</b></p>
+          <div class="subproj">
+            <div class="subproj-item">
+              <h4>S4Life</h4>
+              <span class="subproj-domain">Social · Voluntary blood donation</span>
+              <p>Built project structure, integrated features/libraries and supported teammates; delivered on time and published to both stores, generating revenue on release.</p>
+              <div class="tagrow"><span class="tag">Flutter</span><span class="tag">Firebase Auth</span><span class="tag">Cubit</span><span class="tag">Google Maps</span></div>
+            </div>
+            <div class="subproj-item">
+              <h4>GoBus</h4>
+              <span class="subproj-domain">Social · HCMC bus information search</span>
+              <p>Fixed bugs, developed features and optimized performance; delivered on time and published to both stores.</p>
+              <div class="tagrow"><span class="tag">Flutter</span><span class="tag">Mapbox</span><span class="tag">Provider</span><span class="tag">Hive</span><span class="tag">QR Code</span></div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap reveal">
+    <p class="eyebrow">Education</p>
+    <h2 class="section-title">Education &amp; Background</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <h3>HCMC University of Industry and Trade</h3>
+        <p class="edu-degree">B.Sc. Information Technology — Software Technology</p>
+        <p class="edu-years">2015 – 2019</p>
+      </div>
+      <div class="edu-card">
+        <h3>Languages</h3>
+        <ul>
+          <li><strong>Vietnamese</strong> — Native</li>
+          <li><strong>English</strong> — Professional working proficiency</li>
+        </ul>
+      </div>
+      <div class="edu-card">
+        <h3>Location</h3>
+        <p>Tan Phu, Ho Chi Minh City, Vietnam</p>
+        <p class="edu-years">Open to remote &amp; relocation</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap reveal">
+    <p class="eyebrow">Contact</p>
+    <h2 class="section-title">Let's talk</h2>
+    <div class="contact-panel">
+      <div class="contact-grid">
+        <a class="btn btn--primary" href="mailto:hoangduongit1997@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4V4Z"/><path d="m22 6-10 7L2 6"/></svg>hoangduongit1997@gmail.com
+        </a>
+        <a class="btn btn--ghost" href="tel:+84948907687">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>0948 907 687
+        </a>
+        <a class="btn btn--ghost" href="https://github.com/hoangduongit1997" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>github.com/hoangduongit1997
+        </a>
+        <a class="btn btn--ghost" href="https://www.linkedin.com/in/hoangduongit1997" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>linkedin.com/in/hoangduongit1997
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-links">
+    <a class="footer-link" href="https://github.com/hoangduongit1997" target="_blank" rel="noopener" aria-label="GitHub">
+      <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+    </a>
+    <a class="footer-link" href="https://www.linkedin.com/in/hoangduongit1997" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a class="footer-link" href="mailto:hoangduongit1997@gmail.com" aria-label="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4V4Z"/><path d="m22 6-10 7L2 6"/></svg>
+    </a>
+  </div>
+  <p>Nguyen Minh Hoang Duong &copy; <span id="footerYear"></span></p>
+</footer>
+
+<script>
+  (function(){
+    var sections = document.querySelectorAll('section, header.hero');
+    var links = document.querySelectorAll('.nav__links a');
+    var map = {};
+    links.forEach(function(l){ map[l.getAttribute('href').slice(1)] = l; });
+
+    if ('IntersectionObserver' in window){
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          var id = entry.target.id;
+          if (!id || !map[id]) return;
+          if (entry.isIntersecting){
+            links.forEach(function(l){ l.classList.remove('active'); });
+            map[id].classList.add('active');
+          }
+        });
+      }, { rootMargin: '-40% 0px -55% 0px' });
+      sections.forEach(function(s){ if (s.id) obs.observe(s); });
+
+      var reveals = document.querySelectorAll('.reveal');
+      var robs = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting){ entry.target.classList.add('in'); robs.unobserve(entry.target); }
+        });
+      }, { threshold: 0.12 });
+      reveals.forEach(function(r){ robs.observe(r); });
+    } else {
+      document.querySelectorAll('.reveal').forEach(function(r){ r.classList.add('in'); });
+    }
+
+    var copyBtn = document.getElementById('copyEmailBtn');
+    var copyLabel = document.getElementById('copyEmailLabel');
+    if (copyBtn){
+      copyBtn.addEventListener('click', function(){
+        var email = 'hoangduongit1997@gmail.com';
+        function done(){
+          copyLabel.textContent = 'copied!';
+          setTimeout(function(){ copyLabel.textContent = 'copy email'; }, 1600);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(email).then(done).catch(done);
+        } else {
+          done();
+        }
+      });
+    }
+
+    var commits = document.querySelectorAll('details.commit');
+    commits.forEach(function(d){
+      d.addEventListener('toggle', function(){
+        if (d.open){
+          commits.forEach(function(other){ if (other !== d) other.open = false; });
+        }
+      });
+    });
+
+    var y = document.getElementById('footerYear');
+    if (y) y.textContent = new Date().getFullYear();
+  })();
+</script>
+
+</body>
+</html>
