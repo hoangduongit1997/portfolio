@@ -13,7 +13,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Nguyen Minh Hoang Duong — Senior Flutter Developer">
 <meta name="twitter:description" content="5+ years building production Flutter apps. Clean Architecture, Singpass integration, CI/CD.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23161a25'/%3E%3Ctext x='32' y='40' font-family='monospace' font-size='22' font-weight='700' fill='%236fb7f0' text-anchor='middle'%3E%3C/%3E%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23161a25'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='22' font-weight='700' fill='%236fb7f0' text-anchor='middle'%3E%26lt%3B/%26gt%3B%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -94,6 +94,8 @@
     outline-offset:3px;
     border-radius:4px;
   }
+  .btn--primary:focus-visible{outline-color:var(--ink);}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 
   .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px; position:relative; z-index:1;}
 
@@ -135,36 +137,28 @@
   }
   .nav__logo{
     font-family:var(--font-display); font-weight:600; font-size:15px;
-    color:var(--ink); white-space:nowrap;
+    color:var(--ink); white-space:nowrap; text-decoration:none;
+    transition:color .15s;
   }
+  .nav__logo:hover{color:var(--blue); text-decoration:none;}
   .nav__links{
-    display:flex; align-items:center; gap:22px;
+    display:flex; align-items:center; gap:24px;
     overflow-x:auto;
     scrollbar-width:none;
-    font-size:13.5px;
+    font-size:15px; font-weight:500;
   }
   .nav__links::-webkit-scrollbar{display:none;}
   .nav__links a{
-    color:var(--ink-dim); white-space:nowrap; padding:4px 0;
+    color:var(--ink); white-space:nowrap; padding:4px 0;
     border-bottom:2px solid transparent;
     transition:color .15s, border-color .15s;
   }
-  .nav__links a:hover{color:var(--ink); text-decoration:none;}
+  .nav__links a:hover{opacity:.7; text-decoration:none;}
   .nav__links a.active{color:var(--blue); border-color:var(--blue);}
 
   .nav__right{
     display:flex; align-items:center; gap:8px; flex:none;
   }
-  .nav__gh{
-    display:flex; align-items:center; gap:6px;
-    color:var(--ink); border:1px solid var(--line); border-radius:8px;
-    padding:6px 12px; font-size:13px;
-    font-family:var(--font-mono);
-    transition:border-color .15s, background .15s;
-  }
-  .nav__gh:hover{border-color:var(--blue); background:var(--blue-soft); text-decoration:none;}
-  .nav__gh svg{width:15px; height:15px; flex:none;}
-
   /* Hamburger */
   .nav__toggle{
     display:none; flex-direction:column; justify-content:center; align-items:center;
@@ -181,7 +175,6 @@
   .nav__toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
 
   @media (max-width:600px){
-    .nav__gh{display:none;}
     .nav__toggle{display:flex;}
     .nav__links{
       display:none; position:absolute; top:60px; left:0; right:0;
@@ -199,13 +192,52 @@
     .nav__links a:last-child{border-bottom:none;}
   }
 
-  /* Scroll progress bar */
+  /* Scroll progress bar — full screen width (lives in .nav, not .nav__inner) */
   .nav__progress{
     position:absolute; bottom:0; left:0;
     height:2px; width:0%;
     background:linear-gradient(90deg, var(--blue), var(--teal));
     transition:width .08s linear;
-    z-index:51; border-radius:0 2px 0 0;
+    z-index:51;
+  }
+
+  /* Nav logo */
+  .nav__logo-prefix{
+    font-family:var(--font-mono); font-size:14px;
+    color:var(--ink); margin-right:7px; opacity:.9;
+    font-weight:700; letter-spacing:-0.02em;
+  }
+  .nav__logo-name{
+    font-family:var(--font-display);
+    font-weight:800; font-size:16px;
+    color:var(--ink);
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+  }
+
+  /* Download CV button in nav */
+  .nav__cv{
+    display:flex; align-items:center; gap:6px;
+    font-family:var(--font-mono); font-size:12.5px; font-weight:600;
+    color:var(--ink);
+    background:var(--amber);
+    border-radius:8px; padding:7px 14px;
+    position:relative; overflow:hidden;
+    transition:box-shadow .2s, transform .15s var(--transition-smooth);
+    text-decoration:none; flex:none;
+  }
+  .nav__cv svg{width:13px; height:13px; flex:none;}
+  .nav__cv::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,.4) 50%, transparent 100%);
+    transform:translateX(-100%);
+    animation:navCvShimmer 3.2s ease 1.8s infinite;
+  }
+  .nav__cv:hover{box-shadow:0 4px 18px var(--amber-glow); transform:translateY(-1px); text-decoration:none;}
+  @keyframes navCvShimmer{
+    0%{transform:translateX(-100%);}
+    40%,100%{transform:translateX(130%);}
   }
 
   /* ---------- HERO ---------- */
@@ -221,10 +253,11 @@
     position:relative;
   }
   .hero-photo{
-    flex:none; width:240px;
+    flex:none; width:300px;
+    align-self:stretch;
     object-fit:cover; object-position:top center;
     display:block;
-    border-right:1px solid var(--line);
+    border-left:1px solid var(--line);
   }
   .hero-info{
     padding:34px 32px;
@@ -236,7 +269,7 @@
   }
   @media (max-width:780px){
     .hero-card{flex-direction:column;}
-    .hero-photo{width:100%; max-height:320px; border-right:none; border-bottom:1px solid var(--line);}
+    .hero-photo{width:100%; height:280px; border-left:none; border-top:1px solid var(--line); order:-1;}
   }
 
   /* Status badge */
@@ -283,7 +316,7 @@
   .stat-row{display:flex; gap:28px; margin-bottom:24px; flex-wrap:wrap;}
   .stat{padding:10px 14px; border:1px solid var(--line); border-radius:10px; background:var(--bg-panel-2); min-width:72px;}
   .stat b{font-family:var(--font-display); font-size:20px; color:var(--ink); display:block; line-height:1.2;}
-  .stat span{font-family:var(--font-mono); font-size:11px; color:var(--ink-faint); text-transform:uppercase; letter-spacing:.04em;}
+  .stat span{font-family:var(--font-mono); font-size:11px; color:var(--ink-dim); text-transform:uppercase; letter-spacing:.04em;}
 
   .hero-highlights{
     list-style:none; padding:0; margin:0 0 24px;
@@ -325,13 +358,9 @@
 
   /* ---------- ABOUT ---------- */
   .about-layout{
-    display:grid;
-    grid-template-columns:1fr 340px;
-    gap:40px;
-    align-items:start;
-  }
-  @media (max-width:860px){
-    .about-layout{grid-template-columns:1fr;}
+    display:flex;
+    flex-direction:column;
+    gap:36px;
   }
 
   .about-summary{
@@ -352,35 +381,29 @@
   .about-fact:last-child{border-bottom:none;}
   .about-fact-label{
     font-family:var(--font-mono); font-size:11px;
-    color:var(--ink-faint); text-transform:uppercase;
+    color:var(--ink-dim); text-transform:uppercase;
     letter-spacing:.06em; flex:0 0 120px;
   }
   .about-fact-value{font-size:14px; color:var(--ink);}
 
-  .about-sidebar{display:flex; flex-direction:column; gap:16px;}
-  @media (max-width:860px){
-    .about-sidebar{
-      display:grid; grid-template-columns:1fr 1fr; gap:16px;
-    }
-  }
-  @media (max-width:480px){
-    .about-sidebar{grid-template-columns:1fr;}
-  }
-
   .industry-grid{
-    display:grid; grid-template-columns:1fr 1fr; gap:10px;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:12px;
+    margin-top:28px;
   }
+  @media (max-width:780px){.industry-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:480px){.industry-grid{grid-template-columns:1fr 1fr;}}
+
   .industry-card{
     border:1px solid var(--line); border-radius:10px;
-    background:var(--bg-panel); padding:16px 12px;
+    background:var(--bg-panel); padding:20px 12px;
     display:flex; flex-direction:column; align-items:center;
-    gap:8px; text-align:center;
+    gap:10px; text-align:center;
     font-family:var(--font-mono); font-size:11.5px; color:var(--ink-dim);
     transition:border-color .2s var(--transition-smooth), transform .2s var(--transition-smooth), box-shadow .2s;
     cursor:default;
   }
   .industry-card:hover{transform:translateY(-3px); box-shadow:var(--shadow-card);}
-  .industry-card svg{width:22px; height:22px; flex:none;}
+  .industry-card svg{width:24px; height:24px; flex:none;}
   .industry-card--healthcare{border-color:rgba(87,214,184,.2);}
   .industry-card--healthcare:hover{border-color:var(--teal); color:var(--teal);}
   .industry-card--edtech{border-color:rgba(111,183,240,.2);}
@@ -389,34 +412,6 @@
   .industry-card--ecommerce:hover{border-color:var(--amber); color:var(--amber);}
   .industry-card--entertainment{border-color:rgba(167,139,250,.2);}
   .industry-card--entertainment:hover{border-color:var(--purple); color:var(--purple);}
-
-  /* Terminal block */
-  .about-terminal{
-    border:1px solid var(--line); border-radius:var(--radius);
-    background:var(--bg-panel-3); overflow:hidden;
-  }
-  .terminal-header{
-    display:flex; align-items:center; gap:6px;
-    padding:10px 14px; border-bottom:1px solid var(--line);
-    background:rgba(255,255,255,.02);
-  }
-  .term-dot{width:10px; height:10px; border-radius:50%; flex:none;}
-  .term-dot--red{background:#ff5f57;}
-  .term-dot--yellow{background:#febc2e;}
-  .term-dot--green{background:#28c840;}
-  .term-filename{
-    font-family:var(--font-mono); font-size:11px;
-    color:var(--ink-faint); margin:0 auto;
-  }
-  .terminal-body{
-    margin:0; padding:16px 18px;
-    font-family:var(--font-mono); font-size:12.5px; line-height:1.75;
-    color:var(--ink-dim); overflow-x:auto;
-  }
-  .tok-comment{color:var(--ink-faint); font-style:italic;}
-  .tok-kw{color:var(--blue);}
-  .tok-type{color:var(--teal);}
-  .tok-str{color:var(--amber);}
 
   /* ---------- SKILLS ---------- */
   .skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
@@ -501,7 +496,10 @@
   .commit-meta{display:flex; flex-wrap:wrap; gap:10px; align-items:center; font-family:var(--font-mono); font-size:12px; color:var(--ink-dim);}
   .commit-summary-right{display:flex; align-items:center; gap:10px; margin-left:auto;}
   .commit-company{font-family:var(--font-mono); font-size:11px; color:var(--ink-faint);}
-  @media (max-width:600px){.commit-company{display:none;}}
+  @media (max-width:600px){
+    .commit-company{font-size:10px; display:block; margin-top:2px; text-align:right;}
+    .commit-summary-right{flex-direction:column; align-items:flex-end; gap:2px;}
+  }
 
   .pill{
     font-family:var(--font-mono); font-size:11.5px; padding:3px 9px; border-radius:99px;
@@ -528,12 +526,12 @@
   .commit-bullets li::marker{color:var(--blue);}
   .tagrow{display:flex; flex-wrap:wrap; gap:6px;}
   .tag{
-    font-family:var(--font-mono); font-size:11px; padding:3px 8px; border-radius:6px;
+    font-family:var(--font-mono); font-size:12px; padding:3px 8px; border-radius:6px;
     background:var(--blue-soft); color:var(--blue);
-    transition:background .15s, color .15s, transform .15s;
+    transition:background .15s, color .15s;
     cursor:default;
   }
-  .tag:hover{background:rgba(111,183,240,.22); color:var(--ink); transform:translateY(-1px);}
+  .tag:hover{background:rgba(111,183,240,.22); color:var(--ink);}
   .tag--core{
     background:rgba(111,183,240,.18); color:var(--ink);
     font-weight:600; border:1px solid rgba(111,183,240,.3);
@@ -602,7 +600,7 @@
   .footer-links{display:flex; justify-content:center; gap:16px; margin-bottom:14px;}
   .footer-link{
     display:flex; align-items:center; justify-content:center;
-    width:38px; height:38px; border-radius:50%;
+    width:44px; height:44px; border-radius:50%;
     border:1px solid var(--line); color:var(--ink-faint);
     transition:border-color .15s, color .15s, transform .15s;
   }
@@ -616,7 +614,9 @@
 
 <nav class="nav">
   <div class="nav__inner">
-    <div class="nav__logo">Hoang Duong</div>
+    <a href="#" class="nav__logo" aria-label="Back to top">
+      <span class="nav__logo-prefix">&lt;/&gt;</span><span class="nav__logo-name">Hoang Duong</span>
+    </a>
     <div class="nav__links" id="navLinks">
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
@@ -625,69 +625,59 @@
       <a href="#contact">Contact</a>
     </div>
     <div class="nav__right">
-      <a class="nav__gh" href="https://github.com/hoangduongit1997" target="_blank" rel="noopener">
-        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
-        github
-      </a>
-      <a class="nav__gh" href="https://www.linkedin.com/in/hoangduongit1997" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        linkedin
+      <a class="nav__cv" href="resources/files/CV_Nguyen_Minh_Hoang_Duong.pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download CV
       </a>
       <button class="nav__toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
-    <div class="nav__progress" id="navProgress"></div>
   </div>
+  <div class="nav__progress" id="navProgress"></div>
 </nav>
 
 <!-- hero -->
 <header class="hero">
   <div class="wrap">
     <div class="hero-card reveal in">
-      <img src="resources/images/avatar.jpg" class="hero-photo" alt="Nguyen Minh Hoang Duong">
       <div class="hero-info">
+        <h1 class="preview-name">Nguyen Minh Hoang Duong</h1>
+        <p class="preview-role"><span id="heroTyping">Senior Flutter Developer</span><span class="cursor-blink">|</span></p>
         <div class="hero-status">
           <span class="status-dot"></span>
           <span>Available for senior roles</span>
         </div>
-        <h1 class="preview-name">Nguyen Minh Hoang Duong</h1>
-        <p class="preview-role"><span id="heroTyping">Senior Flutter Developer</span><span class="cursor-blink">|</span></p>
         <div class="preview-meta">
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 1 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>Tan Phu, Ho Chi Minh City, VN</span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>0948 907 687</span>
-          <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>linkedin.com/in/hoangduongit1997</span>
         </div>
         <div class="stat-row">
-          <div class="stat"><b data-target="5" data-suffix="+">5+</b><span>years exp.</span></div>
-          <div class="stat"><b data-target="14" data-suffix="+">14+</b><span>apps shipped</span></div>
-          <div class="stat"><b data-target="4" data-suffix="">4</b><span>industries</span></div>
-          <div class="stat"><b data-target="5" data-suffix="">5</b><span>companies</span></div>
+          <div class="stat"><b data-target="5" data-suffix="+" aria-hidden="true">5+</b><span class="sr-only">5+ years experience.</span><span aria-hidden="true">years exp.</span></div>
+          <div class="stat"><b data-target="14" data-suffix="+" aria-hidden="true">14+</b><span class="sr-only">14+ apps shipped.</span><span aria-hidden="true">apps shipped</span></div>
+          <div class="stat"><b data-target="4" data-suffix="" aria-hidden="true">4</b><span class="sr-only">4 industries.</span><span aria-hidden="true">industries</span></div>
+          <div class="stat"><b data-target="5" data-suffix="" aria-hidden="true">5</b><span class="sr-only">5 companies.</span><span aria-hidden="true">companies</span></div>
         </div>
         <ul class="hero-highlights">
-          <li>Singpass digital identity integration (Singapore national auth)</li>
-          <li>Architecting Flutter apps that scale across teams of 20+</li>
-          <li>−30% crash rate &amp; +10% performance improvement at Care Health</li>
-          <li>End-to-end ownership: requirement analysis → code review → mentoring</li>
+          <li>Flutter developer since October 2019 — 5+ years building production cross-platform apps</li>
+          <li>Focused on high-performance mobile: clean code, smooth UX, crash-free releases</li>
+          <li>Applies Clean Architecture (MVVM, DDD, Bloc) to keep large codebases scalable &amp; testable</li>
+          <li>Collaborative team player — works effectively under pressure and tight deadlines</li>
+          <li>Communicates clearly in English: technical docs, meetings and async collaboration</li>
         </ul>
         <div class="cta-row">
           <a class="btn btn--primary" href="mailto:hoangduongit1997@gmail.com">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4V4Z"/><path d="m22 6-10 7L2 6"/></svg>Email me
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>Email me
           </a>
           <a class="btn btn--ghost" href="https://github.com/hoangduongit1997" target="_blank" rel="noopener">
             <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>GitHub
           </a>
-          <button class="btn btn--copy" id="copyEmailBtn" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span id="copyEmailLabel">copy email</span>
-          </button>
           <a class="btn btn--ghost" href="https://www.linkedin.com/in/hoangduongit1997" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn
           </a>
-          <a class="btn btn--ghost" href="resources/files/CV_Nguyen_Minh_Hoang_Duong.pdf" download>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download CV
-          </a>
         </div>
       </div>
+      <img src="resources/images/avatar.jpg" class="hero-photo" alt="Profile photo">
     </div>
   </div>
 </header>
@@ -709,7 +699,7 @@
           </div>
           <div class="about-fact">
             <span class="about-fact-label">Location</span>
-            <span class="about-fact-value">Tan Phu, Ho Chi Minh City, Vietnam — Open to remote &amp; relocation</span>
+            <span class="about-fact-value">Tan Phu, Ho Chi Minh City, Vietnam — Open to remote work</span>
           </div>
           <div class="about-fact">
             <span class="about-fact-label">Focus area</span>
@@ -721,8 +711,7 @@
           </div>
         </div>
       </div>
-      <div class="about-sidebar">
-        <div class="industry-grid">
+        <div class="industry-grid" aria-hidden="true">
           <div class="industry-card industry-card--healthcare">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
             <span>Healthcare</span>
@@ -740,24 +729,6 @@
             <span>Entertainment</span>
           </div>
         </div>
-        <div class="about-terminal">
-          <div class="terminal-header">
-            <span class="term-dot term-dot--red"></span>
-            <span class="term-dot term-dot--yellow"></span>
-            <span class="term-dot term-dot--green"></span>
-            <span class="term-filename">architecture.dart</span>
-          </div>
-          <pre class="terminal-body"><code><span class="tok-comment">// Approach that scales</span>
-<span class="tok-kw">class</span> <span class="tok-type">FeatureModule</span> {
-  <span class="tok-kw">final</span> <span class="tok-type">Repository</span>  repo;
-  <span class="tok-kw">final</span> <span class="tok-type">UseCase</span>     useCase;
-  <span class="tok-kw">final</span> <span class="tok-type">ViewModel</span>   vm;
-  <span class="tok-comment">// Clean · Testable · Scalable</span>
-}
-
-<span class="tok-comment">// 5+ yrs · 14+ apps · 4 industries</span></code></pre>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -770,7 +741,7 @@
     <div class="timeline">
 
       <details class="commit commit--current" data-level="senior" open>
-        <summary>
+        <summary aria-expanded="true">
           <span class="commit-role">Senior Flutter Developer</span>
           <span class="commit-meta"><span class="pill pill--now">current</span><span>Oct 2023 – Present</span><span>· team of 20</span></span>
           <span class="commit-summary-right">
@@ -801,7 +772,7 @@
       </details>
 
       <details class="commit" data-level="freelance">
-        <summary>
+        <summary aria-expanded="false">
           <span class="commit-role">Freelance Flutter Developer</span>
           <span class="commit-meta"><span>May 2024 – Aug 2024</span><span>· team of 5</span></span>
           <span class="commit-summary-right">
@@ -823,7 +794,7 @@
       </details>
 
       <details class="commit" data-level="mid">
-        <summary>
+        <summary aria-expanded="false">
           <span class="commit-role">Mid-level Flutter Developer</span>
           <span class="commit-meta"><span>Jul 2021 – Sep 2023</span><span>· 5 projects</span></span>
           <span class="commit-summary-right">
@@ -881,7 +852,7 @@
       </details>
 
       <details class="commit" data-level="junior">
-        <summary>
+        <summary aria-expanded="false">
           <span class="commit-role">Junior Flutter Developer</span>
           <span class="commit-meta"><span>May 2020 – Jun 2021</span><span>· 5 projects</span></span>
           <span class="commit-summary-right">
@@ -915,7 +886,7 @@
       </details>
 
       <details class="commit" data-level="junior">
-        <summary>
+        <summary aria-expanded="false">
           <span class="commit-role">Junior Flutter Developer</span>
           <span class="commit-meta"><span>Jul 2019 – Apr 2020</span><span>· 2 projects</span></span>
           <span class="commit-summary-right">
@@ -1000,7 +971,7 @@
         </div>
       </div>
       <div class="skill-cat" style="--skill-accent:var(--blue); --d:480ms">
-        <h3 class="skill-cat-title">Misc</h3>
+        <h3 class="skill-cat-title">Media &amp; Storage</h3>
         <div class="tagrow">
           <span class="tag">Hive</span><span class="tag">Push Notifications</span><span class="tag">QR Code</span><span class="tag">Picture-in-Picture</span><span class="tag">Video Caching</span>
         </div>
@@ -1029,7 +1000,7 @@
       <div class="edu-card" style="--d:160ms">
         <h3>Location</h3>
         <p>Tan Phu, Ho Chi Minh City, Vietnam</p>
-        <p class="edu-years">Open to remote &amp; relocation</p>
+        <p class="edu-years">Open to remote work</p>
       </div>
     </div>
   </div>
@@ -1045,16 +1016,19 @@
       </div>
       <div class="contact-grid">
         <a class="btn btn--primary" href="mailto:hoangduongit1997@gmail.com">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4V4Z"/><path d="m22 6-10 7L2 6"/></svg>hoangduongit1997@gmail.com
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>Email me
+        </a>
+        <a class="btn btn--ghost" href="resources/files/CV_Nguyen_Minh_Hoang_Duong.pdf" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Download CV
         </a>
         <a class="btn btn--ghost" href="tel:+84948907687">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>0948 907 687
         </a>
         <a class="btn btn--ghost" href="https://github.com/hoangduongit1997" target="_blank" rel="noopener">
-          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>github.com/hoangduongit1997
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>GitHub
         </a>
         <a class="btn btn--ghost" href="https://www.linkedin.com/in/hoangduongit1997" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>linkedin.com/in/hoangduongit1997
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn
         </a>
       </div>
     </div>
@@ -1088,23 +1062,28 @@
     }
 
     /* ---- Active nav tracking ---- */
-    var sections = document.querySelectorAll('section, header.hero');
     var links = document.querySelectorAll('.nav__links a');
-    var map = {};
-    links.forEach(function(l){ map[l.getAttribute('href').slice(1)] = l; });
+    var navSectionIds = Array.from(links).map(function(l){ return l.getAttribute('href').slice(1); });
+
+    function updateActiveNav(){
+      var threshold = window.innerHeight * 0.33;
+      var atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 60;
+      var current = null;
+      navSectionIds.forEach(function(id){
+        var el = document.getElementById(id);
+        if (!el) return;
+        if (el.getBoundingClientRect().top <= threshold) current = id;
+      });
+      if (atBottom) current = navSectionIds[navSectionIds.length - 1];
+      links.forEach(function(l){
+        var id = l.getAttribute('href').slice(1);
+        l.classList.toggle('active', id === current);
+      });
+    }
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    updateActiveNav();
 
     if ('IntersectionObserver' in window){
-      var obs = new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){
-          var id = entry.target.id;
-          if (!id || !map[id]) return;
-          if (entry.isIntersecting){
-            links.forEach(function(l){ l.classList.remove('active'); });
-            map[id].classList.add('active');
-          }
-        });
-      }, { rootMargin: '-40% 0px -55% 0px' });
-      sections.forEach(function(s){ if (s.id) obs.observe(s); });
 
       /* ---- Reveal on scroll ---- */
       var reveals = document.querySelectorAll('.reveal');
@@ -1147,49 +1126,57 @@
     var typingEl = document.getElementById('heroTyping');
     if (typingEl) {
       var phrases = ['Senior Flutter Developer', 'Mobile Architect', 'Clean Code Advocate', 'Cross-Platform Expert'];
-      var ti = 0, ci = phrases[0].length, deleting = false, started = false;
-      function typeTick() {
-        var cur = phrases[ti];
-        typingEl.textContent = cur.slice(0, ci);
-        if (!deleting && ci === cur.length) {
-          deleting = true;
-          setTimeout(typeTick, 2200);
-          return;
+      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reducedMotion) {
+        typingEl.textContent = phrases[0];
+      } else {
+        var ti = 0, ci = phrases[0].length, deleting = false;
+        function typeTick() {
+          var cur = phrases[ti];
+          typingEl.textContent = cur.slice(0, ci);
+          if (!deleting && ci === cur.length) {
+            deleting = true;
+            setTimeout(typeTick, 2200);
+            return;
+          }
+          if (deleting && ci === 0) {
+            deleting = false;
+            ti = (ti + 1) % phrases.length;
+          }
+          ci += deleting ? -1 : 1;
+          setTimeout(typeTick, deleting ? 48 : 88);
         }
-        if (deleting && ci === 0) {
-          deleting = false;
-          ti = (ti + 1) % phrases.length;
-        }
-        ci += deleting ? -1 : 1;
-        setTimeout(typeTick, deleting ? 48 : 88);
+        setTimeout(typeTick, 2600);
       }
-      setTimeout(typeTick, 2600);
     }
 
-    /* ---- Copy email ---- */
-    var copyBtn = document.getElementById('copyEmailBtn');
-    var copyLabel = document.getElementById('copyEmailLabel');
-    if (copyBtn){
-      copyBtn.addEventListener('click', function(){
-        var email = 'hoangduongit1997@gmail.com';
-        function done(){
-          copyLabel.textContent = 'copied!';
-          setTimeout(function(){ copyLabel.textContent = 'copy email'; }, 1600);
-        }
-        if (navigator.clipboard && navigator.clipboard.writeText){
-          navigator.clipboard.writeText(email).then(done).catch(done);
-        } else {
-          done();
-        }
-      });
-    }
 
     /* ---- Accordion: one open at a time + smooth height animation ---- */
     var commits = document.querySelectorAll('details.commit');
+    function closeCommit(el) {
+      var body = el.querySelector('.commit-body');
+      var sum = el.querySelector('summary');
+      if (!body) { el.open = false; if (sum) sum.setAttribute('aria-expanded', 'false'); return; }
+      body.style.overflow = 'hidden';
+      body.style.maxHeight = body.scrollHeight + 'px';
+      body.style.transition = 'max-height .28s cubic-bezier(0.16,1,0.3,1)';
+      requestAnimationFrame(function() {
+        body.style.maxHeight = '0px';
+        setTimeout(function(){
+          el.open = false;
+          body.style.maxHeight = '';
+          body.style.overflow = '';
+          body.style.transition = '';
+          if (sum) sum.setAttribute('aria-expanded', 'false');
+        }, 300);
+      });
+    }
     commits.forEach(function(d){
       d.addEventListener('toggle', function(){
+        var sum = d.querySelector('summary');
         if (d.open){
-          commits.forEach(function(other){ if (other !== d) other.open = false; });
+          if (sum) sum.setAttribute('aria-expanded', 'true');
+          commits.forEach(function(other){ if (other !== d && other.open) closeCommit(other); });
           /* animate open */
           var body = d.querySelector('.commit-body');
           if (body) {
@@ -1198,7 +1185,7 @@
             body.style.transition = 'max-height .34s cubic-bezier(0.16,1,0.3,1)';
             requestAnimationFrame(function() {
               body.style.maxHeight = body.scrollHeight + 'px';
-              setTimeout(function(){ body.style.maxHeight = ''; body.style.overflow = ''; }, 360);
+              setTimeout(function(){ body.style.maxHeight = ''; body.style.overflow = ''; body.style.transition = ''; }, 360);
             });
           }
         }
@@ -1212,12 +1199,26 @@
       navToggle.addEventListener('click', function() {
         var isOpen = navLinksList.classList.toggle('open');
         navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        navToggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+        if (isOpen) {
+          var firstLink = navLinksList.querySelector('a');
+          if (firstLink) firstLink.focus();
+        }
       });
       navLinksList.querySelectorAll('a').forEach(function(a) {
         a.addEventListener('click', function() {
           navLinksList.classList.remove('open');
           navToggle.setAttribute('aria-expanded', 'false');
+          navToggle.setAttribute('aria-label', 'Open navigation menu');
         });
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navLinksList.classList.contains('open')) {
+          navLinksList.classList.remove('open');
+          navToggle.setAttribute('aria-expanded', 'false');
+          navToggle.setAttribute('aria-label', 'Open navigation menu');
+          navToggle.focus();
+        }
       });
     }
 

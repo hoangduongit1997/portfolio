@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project overview
 
-Single-file static portfolio for Nguyen Minh Hoang Duong (Senior Flutter Developer). No build step, no dependencies, no framework — the entire site is `index.html`. The PDF `CV_Nguyen_Minh_Hoang_Duong.pdf` is the source-of-truth for content.
+Single-file static portfolio for Nguyen Minh Hoang Duong (Senior Flutter Developer). No build step, no dependencies, no framework — the entire site is `index.html`. The PDF [text](resources/files/CV_Nguyen_Minh_Hoang_Duong.pdf) and [text](resources/files/CV_Nguyen_Minh_Hoang_Duong_2.pdf) is the source-of-truth for content.
 
 ## Running locally
 
