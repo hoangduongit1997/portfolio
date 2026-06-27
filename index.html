@@ -107,11 +107,9 @@
     height:60px;
   }
   .nav__logo{
-    font-family:var(--font-mono); font-weight:600; font-size:15px;
+    font-family:var(--font-display); font-weight:600; font-size:15px;
     color:var(--ink); white-space:nowrap;
   }
-  .nav__logo .br{color:var(--ink-faint);}
-  .nav__logo .nm{color:var(--blue);}
   .nav__links{
     display:flex; align-items:center; gap:22px;
     overflow-x:auto;
@@ -179,7 +177,9 @@
   .preview-meta span{display:flex; align-items:center; gap:6px;}
   .preview-meta svg{width:14px; height:14px; flex:none; color:var(--ink-faint);}
 
-  .preview-tagline{font-size:14.5px; color:var(--ink-dim); margin:0 0 22px; max-width:480px;}
+  .hero-highlights{margin:0 0 22px; padding-left:18px; color:var(--ink-dim); font-size:13.5px; line-height:1.7;}
+  .hero-highlights li{margin-bottom:5px;}
+  .hero-highlights li::marker{color:var(--teal);}
 
   .stat-row{display:flex; gap:22px; margin-bottom:24px; flex-wrap:wrap;}
   .stat b{font-family:var(--font-display); font-size:20px; color:var(--ink); display:block;}
@@ -205,23 +205,6 @@
 
   .reveal{opacity:0; transform:translateY(14px); transition:opacity .55s ease, transform .55s ease;}
   .reveal.in{opacity:1; transform:none;}
-
-  /* ---------- SUMMARY ---------- */
-  .summary-grid{display:grid; grid-template-columns:1.3fr .9fr; gap:40px; align-items:start;}
-  @media (max-width:780px){ .summary-grid{grid-template-columns:1fr;} }
-  .summary-text p{color:var(--ink-dim); font-size:16px; margin:0 0 16px;}
-  .summary-text strong{color:var(--ink); font-weight:600;}
-  .focus-card{
-    border:1px solid var(--line); border-radius:var(--radius); background:var(--bg-panel);
-    padding:20px;
-  }
-  .focus-card h3{
-    font-family:var(--font-body); font-size:12px; color:var(--ink-faint);
-    text-transform:uppercase; letter-spacing:.05em; margin:0 0 14px; font-weight:600;
-  }
-  .focus-card ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:11px;}
-  .focus-card li{display:flex; gap:10px; font-size:14px; color:var(--ink-dim);}
-  .focus-card li svg{width:15px; height:15px; flex:none; margin-top:2px; color:var(--teal);}
 
   /* ---------- SKILLS ---------- */
   .skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
@@ -350,11 +333,10 @@
 
 <nav class="nav">
   <div class="nav__inner">
-    <div class="nav__logo"><span class="br">&lt;</span><span class="nm">ND</span><span class="br">/&gt;</span></div>
+    <div class="nav__logo">Hoang Duong</div>
     <div class="nav__links" id="navLinks">
-      <a href="#summary">Summary</a>
-      <a href="#skills">Skills</a>
       <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
       <a href="#education">Education</a>
       <a href="#contact">Contact</a>
     </div>
@@ -382,12 +364,17 @@
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>0948 907 687</span>
           <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>linkedin.com/in/hoangduongit1997</span>
         </div>
-        <p class="preview-tagline">Cross-platform mobile engineer shipping production Flutter apps across healthcare, edtech, e-commerce and entertainment — from Singpass digital identity to CI/CD pipelines.</p>
         <div class="stat-row">
           <div class="stat"><b>5+</b><span>years exp.</span></div>
           <div class="stat"><b>14+</b><span>apps shipped</span></div>
           <div class="stat"><b>4</b><span>industries</span></div>
         </div>
+        <ul class="hero-highlights">
+          <li>Singpass digital identity integration (Singapore national auth)</li>
+          <li>Architecting Flutter apps that scale across teams of 20+</li>
+          <li>−30% crash rate &amp; +10% performance improvement at Care Health</li>
+          <li>Mentoring &amp; cross-layer code review (native + Flutter)</li>
+        </ul>
         <div class="cta-row">
           <a class="btn btn--primary" href="mailto:hoangduongit1997@gmail.com">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4V4Z"/><path d="m22 6-10 7L2 6"/></svg>Email me
@@ -409,92 +396,6 @@
     </div>
   </div>
 </header>
-
-<section id="summary">
-  <div class="wrap reveal">
-    <p class="eyebrow">About</p>
-    <h2 class="section-title">What I do</h2>
-    <div class="summary-grid">
-      <div class="summary-text">
-        <p><strong>5+ years</strong> building, shipping and maintaining cross-platform mobile apps on iOS &amp; Android, across <strong>healthcare, edtech, e-commerce and entertainment</strong>.</p>
-        <p>I lead app architecture with <strong>Clean Architecture, MVVM, OOP and Domain-Driven Design</strong>, and have delivered complex integrations including <strong>Singpass</strong> national digital identity, native bridging (Java/Swift), and full CI/CD pipelines with Codemagic.</p>
-        <p>Strong track record of improving app performance, stability and release velocity while keeping codebases scalable and maintainable. Comfortable owning features end-to-end — from requirement analysis with clients to code review and mentoring teammates.</p>
-      </div>
-      <div class="focus-card">
-        <h3>Currently focused on</h3>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7"/></svg>Identity &amp; auth flows — Singpass-grade verification</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7"/></svg>Architecting Flutter apps that scale across teams of 20+</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7"/></svg>Crash-rate &amp; performance reduction (−30% error rate @ Care Health)</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m5 13 4 4L19 7"/></svg>Mentoring &amp; code review across native + Flutter layers</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="skills">
-  <div class="wrap reveal">
-    <p class="eyebrow">Skills</p>
-    <h2 class="section-title">Toolbox</h2>
-    <div class="skills-grid">
-      <div class="skill-cat">
-        <h3 class="skill-cat-title">Mobile (Core)</h3>
-        <div class="tagrow">
-          <span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">iOS &amp; Android</span>
-        </div>
-      </div>
-      <div class="skill-cat">
-        <h3 class="skill-cat-title">State Management</h3>
-        <div class="tagrow">
-          <span class="tag">Bloc</span><span class="tag">Cubit</span><span class="tag">GetX</span><span class="tag">RxDart</span><span class="tag">Provider</span><span class="tag">Riverpod</span>
-        </div>
-      </div>
-      <div class="skill-cat">
-        <h3 class="skill-cat-title">Architecture</h3>
-        <div class="tagrow">
-          <span class="tag">Clean Architecture</span><span class="tag">MVVM</span><span class="tag">OOP</span><span class="tag">Domain-Driven Design</span>
-        </div>
-      </div>
-      <div class="skill-cat">
-        <h3 class="skill-cat-title">Backend &amp; Cloud</h3>
-        <div class="tagrow">
-          <span class="tag">Firebase Auth</span><span class="tag">Firestore</span><span class="tag">Crashlytics</span><span class="tag">Analytics</span><span class="tag">Messaging</span><span class="tag">Remote Config</span><span class="tag">Google Cloud APIs</span>
-        </div>
-      </div>
-      <div class="skill-cat">
-        <h3 class="skill-cat-title">Maps &amp; Location</h3>
-        <div class="tagrow">
-          <span class="tag">Google Maps</span><span class="tag">Mapbox</span><span class="tag">Geolocation</span><span class="tag">Location Tracking</span>
-        </div>
-      </div>
-      <div class="skill-cat">
-        <h3 class="skill-cat-title">CI/CD &amp; DevOps</h3>
-        <div class="tagrow">
-          <span class="tag">Codemagic</span><span class="tag">Automated Build &amp; Deploy</span><span class="tag">Deeplink</span>
-        </div>
-      </div>
-      <div class="skill-cat">
-        <h3 class="skill-cat-title">Native &amp; Integrations</h3>
-        <div class="tagrow">
-          <span class="tag">Java/Kotlin</span><span class="tag">Swift</span><span class="tag">Platform Channels</span><span class="tag">InAppWebView</span><span class="tag">Singpass</span><span class="tag">Stringee SDK</span>
-        </div>
-      </div>
-      <div class="skill-cat">
-        <h3 class="skill-cat-title">Web (Familiar)</h3>
-        <div class="tagrow">
-          <span class="tag">Vue.js</span><span class="tag">React.js</span><span class="tag">React Native</span>
-        </div>
-      </div>
-      <div class="skill-cat">
-        <h3 class="skill-cat-title">Misc</h3>
-        <div class="tagrow">
-          <span class="tag">Hive</span><span class="tag">Push Notifications</span><span class="tag">QR Code</span><span class="tag">Picture-in-Picture</span><span class="tag">Video Caching</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <section id="experience">
   <div class="wrap reveal">
@@ -661,6 +562,69 @@
         </div>
       </details>
 
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap reveal">
+    <p class="eyebrow">Skills</p>
+    <h2 class="section-title">Toolbox</h2>
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <h3 class="skill-cat-title">Mobile (Core)</h3>
+        <div class="tagrow">
+          <span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">iOS &amp; Android</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3 class="skill-cat-title">State Management</h3>
+        <div class="tagrow">
+          <span class="tag">Bloc</span><span class="tag">Cubit</span><span class="tag">GetX</span><span class="tag">RxDart</span><span class="tag">Provider</span><span class="tag">Riverpod</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3 class="skill-cat-title">Architecture</h3>
+        <div class="tagrow">
+          <span class="tag">Clean Architecture</span><span class="tag">MVVM</span><span class="tag">OOP</span><span class="tag">Domain-Driven Design</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3 class="skill-cat-title">Backend &amp; Cloud</h3>
+        <div class="tagrow">
+          <span class="tag">Firebase Auth</span><span class="tag">Firestore</span><span class="tag">Crashlytics</span><span class="tag">Analytics</span><span class="tag">Messaging</span><span class="tag">Remote Config</span><span class="tag">Google Cloud APIs</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3 class="skill-cat-title">Maps &amp; Location</h3>
+        <div class="tagrow">
+          <span class="tag">Google Maps</span><span class="tag">Mapbox</span><span class="tag">Geolocation</span><span class="tag">Location Tracking</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3 class="skill-cat-title">CI/CD &amp; DevOps</h3>
+        <div class="tagrow">
+          <span class="tag">Codemagic</span><span class="tag">Automated Build &amp; Deploy</span><span class="tag">Deeplink</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3 class="skill-cat-title">Native &amp; Integrations</h3>
+        <div class="tagrow">
+          <span class="tag">Java/Kotlin</span><span class="tag">Swift</span><span class="tag">Platform Channels</span><span class="tag">InAppWebView</span><span class="tag">Singpass</span><span class="tag">Stringee SDK</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3 class="skill-cat-title">Web (Familiar)</h3>
+        <div class="tagrow">
+          <span class="tag">Vue.js</span><span class="tag">React.js</span><span class="tag">React Native</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <h3 class="skill-cat-title">Misc</h3>
+        <div class="tagrow">
+          <span class="tag">Hive</span><span class="tag">Push Notifications</span><span class="tag">QR Code</span><span class="tag">Picture-in-Picture</span><span class="tag">Video Caching</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
