@@ -3,7 +3,7 @@
 **Senior Flutter Developer** · 7+ years · Ho Chi Minh City, Vietnam
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-hoangduongit1997-0A66C2?style=flat&logo=linkedin)](https://www.linkedin.com/in/hoangduongit1997)
-[![Portfolio](https://img.shields.io/badge/Portfolio-hoangduongit1997.github.io-111827?style=flat&logo=githubpages)](https://hoangduongit1997.github.io/portfolio/)
+[![Portfolio](https://img.shields.io/badge/Portfolio-hoangduongit1997.github.io-111827?style=flat&logo=githubpages)](https://hoangduongit1997.github.io)
 [![Email](https://img.shields.io/badge/Email-hoangduongit1997@gmail.com-EA4335?style=flat&logo=gmail)](mailto:hoangduongit1997@gmail.com)
 
 ---
